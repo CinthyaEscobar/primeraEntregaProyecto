@@ -1,0 +1,21 @@
+body{
+    background-color: pink;
+}
+
+.titulo{
+    display: grid;
+    text-align: center;
+    font-family: 'Potta One', cursive;
+    color: rgb(202, 156, 217)
+    ;
+
+}
+
+.subtitulo{
+    display: grid;
+    text-align: center;
+}
+
+.card-img-top{
+    size: 100px;
+}
