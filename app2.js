@@ -13,8 +13,6 @@ saludar()
 agregarProducto()
 
 
-
-
 function agregarProducto() {
 
     producto = prompt('Cual producto desea comprar?\n 1: Delineador \n 2:Base de Maquillaje \n 3: Paleta de Sombras \n 4:Serum Acido Hialuronico');
