@@ -14,6 +14,7 @@ agregarProducto()
 
 
 
+
 function agregarProducto() {
 
     producto = prompt('Cual producto desea comprar?\n 1: Delineador \n 2:Base de Maquillaje \n 3: Paleta de Sombras \n 4:Serum Acido Hialuronico');
@@ -52,6 +53,7 @@ function agregarProducto() {
     opcion = prompt('Que desea realizar? \n 1:Añadir otro producto \n 2: Ver productos con ofertas \n 3:Mostrar carrito \n 4: Salir')
 
 }
+
 while (opcion !== '4') {
     if (opcion === '1') {
         agregarProducto()
@@ -82,25 +84,31 @@ function mostrarOfertas() {
 
 
 totalAPagar()
-function totalAPagar(){
-    const total = carrito.reduce((acc,el) => acc + el.precio,0)
+function totalAPagar() {
+    const total = carrito.reduce((acc, el) => acc + el.precio, 0)
     alert(`El total de su compra es de:$ ${total}`)
 }
 pagarProducto()
-function pagarProducto() {  
-    let pagar = prompt(`Como desea pagar? \n 1: Débito \n 2: Efectivo \n 3: Cancelar compra y salir.`)
-    switch (pagar) {
-        case '1':
-            alert('Su pago con tarjeta ha sido aceptado. Gracias por su compra')
-            break
-        case '2':
-            alert('Su pago con dinero en efectivo sido aceptado.\n  Gracias por su compra')
-            break
-        case '3':
-            alert('Se ha cancelado su compra')
-            break
-        default:
-            alert('opcion no válida')
-             }
-    
+function pagarProducto() {
+
+    let pagar = 0
+
+    do {
+        pagar = Number(prompt(`Como desea pagar? \n 1: Débito \n 2: Efectivo \n 3: Cancelar compra y salir.`))
+        switch (pagar) {
+            case 1:
+                alert('Su pago con tarjeta ha sido aceptado. Gracias por su compra')
+                break
+            case 2:
+                alert('Su pago con dinero en efectivo sido aceptado.\n  Gracias por su compra')
+                break
+            case 3:
+                alert('Se ha cancelado su compra')
+                break
+            default:
+                alert('opcion no válida')
+        }
+    } while (pagar < 1 || pagar > 3)
+
+
 } 
