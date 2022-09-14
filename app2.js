@@ -1,66 +1,68 @@
 let productos = [{ id: 1, nombre: 'Delineador', marca: 'Maybelline', precio: 3000 },
 { id: 2, nombre: 'Base de maquillaje', marca: 'Loreal', precio: 6000 },
 { id: 3, nombre: 'Paleta de sombras', marca: 'NYX', precio: 10500 },
-{ id: 4, nombre: 'Serum Acido Hialuronico', marca: 'Loreal', precio: 12000 }]
+{ id: 4, nombre: 'Serum Acido Hialuronico', marca: 'Loreal', precio: 12000 },
+{ id: 5, nombre: 'Producto Nuevo', marca: 'Nuevo', precio: 15000 }]
 
 let carrito = []
 
-let nombreUser = prompt('Por favor ingrese su nombre')
+
+let nombre = ''
 function saludar() {
-    alert(`Bienvenida/o ${nombreUser} a la tienda Eivon!\n El día de hoy los productos sobre $10.000 están con descuentos `)
-}
-saludar()
-agregarProducto()
-
-
-function agregarProducto() {
-
-    producto = prompt('Cual producto desea comprar?\n 1: Delineador \n 2:Base de Maquillaje \n 3: Paleta de Sombras \n 4:Serum Acido Hialuronico');
-    switch (producto) {
-        case '1':
-            seleccionado = productos[0].nombre;
-            marca = productos[0].marca;
-            valor = productos[0].precio;
-            alert(`Has seleccionado ${seleccionado},Marca: ${marca} Valor: $${valor}`)
-            carrito.push(productos[0]);
-            break;
-        case '2':
-            seleccionado = productos[1].nombre;
-            marca = productos[1].marca;
-            valor = productos[1].precio;
-            alert(`Has seleccionado ${seleccionado},Marca: ${marca} Valor: $${valor}`)
-            carrito.push(productos[1]);
-            break;
-        case '3':
-            seleccionado = productos[2].nombre;
-            marca = productos[2].marca;
-            valor = productos[2].precio;
-            alert(`Has seleccionado ${seleccionado}, Marca: ${marca} Valor: $${valor}`)
-            carrito.push(productos[2]);
-            break;
-        case '4':
-            seleccionado = productos[3].nombre;
-            marca = productos[3].marca;
-            valor = productos[3].precio;
-            alert(`Has seleccionado ${seleccionado}, Marca: ${marca} Valor: $${valor}`)
-            carrito.push(productos[3]);
-            break;
-        default:
-            alert('Opcion no válida')
+    do {
+        nombre = prompt("Hola, bienvenido a la tienda Eivon,por favor, debe ingresar su nombre para continuar con la compra")
     }
+    while (nombre == '' || nombre == null)
+    alert(`Bienvenida/o ${nombre} a la tienda Eivon!\n El día de hoy los productos sobre $10.000 están con descuentos `)
+    console.log(nombre);
+}
+
+saludar()
+mostrarProductos()
+
+
+function mostrarProductos() {
+    idProducto = Number(prompt(`Cual producto desea comprar?\n
+    ${productos.map((producto, indice) => {
+        return `\nProducto ${producto.id} : ${producto.nombre} - Precio : ${producto.precio} - Marca: ${producto.marca}\n`
+    })}`));
+    console.log(productos);
+    let item = productos.find(m => m.id === idProducto)
+    validarIngreso(item)
+}
+
+//funcion manda parametros para que luego en la sigueinte funcion se puedan utilizar en cascada
+
+//validar que el producto exista, id válido
+function validarIngreso(item) {
+    if (item != undefined) {
+        agregarProducto(item)
+    } else {
+        alert('Opción no valida. Vuelva a seleccionar un producto')
+        mostrarProductos()
+    }
+
+}
+
+function agregarProducto(item) {
+    alert(`Has seleccionado: ${item.nombre}, Marca: ${item.marca}, Precio:${item.precio}`)
+    carrito.push(item)
     opcion = prompt('Que desea realizar? \n 1:Añadir otro producto \n 2: Ver productos con ofertas \n 3:Mostrar carrito \n 4: Salir')
 
 }
 
+
 while (opcion !== '4') {
     if (opcion === '1') {
-        agregarProducto()
+        mostrarProductos()
     }
     if (opcion == '2') {
         mostrarOfertas()
     }
     if (opcion === '3') {
         mostrarCarrito()
+    }else{
+        opcion = prompt('Que desea realizar? \n 1:Añadir otro producto \n 2: Ver productos con ofertas \n 3:Mostrar carrito \n 4: Salir')
     }
 }
 
@@ -75,7 +77,7 @@ function mostrarCarrito() {
 function mostrarOfertas() {
     let ofertas = productos.filter((producto) => producto.precio > 10000);
     for (let oferta of ofertas) {
-        alert(`Los productos con 10% de descuento de hoy: ${oferta.nombre}, Precio: ${oferta.precio}`)
+        alert(`Los productos con 10% de descuento de hoy: \n ${oferta.nombre}, Precio: ${oferta.precio}, Marca: ${oferta.marca}`)
     }
     opcion = prompt('Que desea realizar? \n 1:Añadir otro producto \n 2: Ver productos con ofertas \n 3:Mostrar carrito \n 4: Salir')
 }
